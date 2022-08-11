@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+
+<body>
+   <div class="container py-2">
+   <p class="lead">Ingrese los productos</p>
+   <form>
+       <input id="codigo" type="text" placeholder="Ingrese el codigo" class="form-control my-2">
+       <input id="nombre" type="text" placeholder="Ingrese el nombre" class="form-control my-2">
+       <input id="color" type="text" placeholder="Ingrese el color" class="form-control my-2">
+       <input id="peso" type="text" placeholder="Ingrese el peso" class="form-control my-2">
+       <button id="boton" class="btn btn-success" type="reset" onclick="guardar();">Agregar</button>
+       <button id="boton" class="btn btn-success" type="reset" onclick="mostrar();">Mostrar</button>
+       <button id="boton" class="btn btn-success" type="reset" onclick="mostrarTotal();">Mostrar Total</button>
+       <button id="boton" class="btn btn-success" type="reset" onclick="eliminar();">Eliminar</button>
+       <button id="boton" class="btn btn-success" type="reset" onclick="actualizar();">Actualizar</button>
+       <a class="btn btn-success" href="https://www.youtube.com/" role="button">Youtube</a>
+       <a class="btn btn-success" href="https://www.certus.edu.pe/blog/wp-content/uploads/2020/02/por-que-estudiar-desarrollo-software-portada-1200x720.jpg" role="button">Imagen</a>
+   </form>
+   </div>
+
+</body>
+<div class="container">
+    <table class="table" id="tabla">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Color</th>
+                <th>Peso</th>
+            </tr>
+        </thead>
+        
+    </table>
+
+</div>
+
+<script>
+    var arreglo= [];
+    function productos(codigo, nombre, color, peso){
+            this.codigo=codigo;
+            this.nombre=nombre;
+            this.color=color;
+            this.peso=peso;
+        }
+
+    function guardar(){
+    
+       
+        var codigoGuardar = document.getElementById("codigo").value;
+        var nombreGuardar = document.getElementById("nombre").value;
+        var colorGuardar = document.getElementById("color").value;
+        var pesoGuardar = document.getElementById("peso").value;
+
+        NuevoProducto = new productos(codigoGuardar, nombreGuardar, colorGuardar, pesoGuardar);
+        arreglo.push(NuevoProducto);
+        
+    }
+    
+    console.log(arreglo);
+   
+    function mostrar(){
+      arreglo.forEach(element => {
+      document.getElementById("tabla").innerHTML += '<tbody><td>'+element.codigo+'</td><td>'+element.nombre+'</td><td>'+element.color+'</td><td>'+element.peso+'</td></tbody>';
+       });
+    }
+    
+    function mostrarTotal(){
+        alert(arreglo.length);
+    }
+
+    function buscarIndice(){
+      var productoBuscado = document.getElementById("codigo").value;
+      var indice = arreglo.indexOf(element => element.codigo = productoBuscado);
+      return indice;
+   }
+
+    function actualizar(){
+      var i = buscarIndice();
+      eliminar();
+      arreglo[i] = guardar();
+      console.log(arreglo)
+    }
+
+    function eliminar(){
+     arreglo.splice(buscarIndice(),0);
+     console.log(arreglo)
+    }
+</script>
+</html>
